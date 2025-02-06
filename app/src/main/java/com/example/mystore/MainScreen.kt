@@ -58,14 +58,14 @@ fun MainScreen (modifier: Modifier = Modifier){
             }
         }
     ) { innerPadding ->
-        ContentScreen(modifier = Modifier.padding(innerPadding), selectedIndex)
+        ContentScreen(modifier = Modifier.padding(innerPadding), selectedIndex, innerPadding)
     }
 }
 
 @Composable
-fun ContentScreen (modifier: Modifier = Modifier, selectedIndex : Int){
+fun ContentScreen (modifier: Modifier = Modifier, selectedIndex : Int, paddingValues: androidx.compose.foundation.layout.PaddingValues){
     when(selectedIndex){
-        0-> HomePage()
+        0-> HomePage(paddingValues = paddingValues)
         1-> ProfilePage()
     }
 }
