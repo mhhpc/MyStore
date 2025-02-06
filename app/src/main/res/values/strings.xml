@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">My Store</string>
+
+    <string name="b_navigation_home">Home</string>
+    <string name="b_navigation_profile">Profile</string>
+
+    <string name="homepage_title">Home Page</string>
+    <string name="profilepage_title">Profile Page</string>
+
+</resources>
