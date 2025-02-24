@@ -23,6 +23,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
@@ -36,24 +37,22 @@ import com.example.mystore.ui.theme.PurpleGrey40
 import com.example.mystore.viewModel.PostViewModel
 
 @Composable
-fun HomePage(viewModel: PostViewModel = PostViewModel(), paddingValues: PaddingValues) {
-
-    val products by viewModel.products
+fun HomePage(viewModel: PostViewModel, paddingValues: PaddingValues) {
+    val products by viewModel.products.observeAsState(emptyList())
 
     if (products.isEmpty()) {
-        CircularProgressIndicator()
+        CircularProgressIndicator(modifier = Modifier.padding(16.dp))
     } else {
         LazyColumn(
             contentPadding = PaddingValues(16.dp),
             verticalArrangement = Arrangement.spacedBy(8.dp),
             modifier = Modifier.padding(paddingValues)
         ) {
-            items(products) {
-                ProductCard(it)
+            items(products) { product ->
+                ProductCard(product)
             }
         }
     }
-
 }
 
 @Composable

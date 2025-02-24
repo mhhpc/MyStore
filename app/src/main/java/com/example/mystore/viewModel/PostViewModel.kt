@@ -1,28 +1,25 @@
 package com.example.mystore.viewModel
 
-import androidx.compose.runtime.State
-import androidx.compose.runtime.mutableStateOf
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.mystore.data.api.RetrofitInstance
+import com.example.mystore.data.database.ProductRepository
 import com.example.mystore.data.models.Product
 import kotlinx.coroutines.launch
 
-class PostViewModel: ViewModel() {
-    private val _products = mutableStateOf<List<Product>>(emptyList())
-    val products: State<List<Product>> = _products
+class PostViewModel(private val repository: ProductRepository) : ViewModel() {
+    private val _products = MutableLiveData<List<Product>>()
+    val products: LiveData<List<Product>> = _products
 
     init {
-        fetchProducts()
+        getProducts()
     }
 
-    private fun fetchProducts() {
+    private fun getProducts() {
         viewModelScope.launch {
-            try {
-                _products.value = RetrofitInstance.api.getProducts()
-            }catch (e: Exception){
-                //Handle Error
-            }
+            _products.value = repository.getProducts()
         }
     }
 }
+

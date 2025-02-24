@@ -1,4 +1,4 @@
-package com.example.mystore
+package com.example.mystoreCo
 
 import androidx.compose.ui.graphics.vector.ImageVector
 

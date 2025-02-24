@@ -22,10 +22,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import com.example.mystore.pages.HomePage
 import com.example.mystore.pages.ProfilePage
+import com.example.mystore.viewModel.PostViewModel
+import com.example.mystoreCo.NavItem
 
 
 @Composable
-fun MainScreen (modifier: Modifier = Modifier){
+fun MainScreen (viewModel: PostViewModel, modifier: Modifier = Modifier){
 
     val navItemList = listOf(
         NavItem(stringResource(R.string.b_navigation_home), Icons.Default.ShoppingCart),
@@ -57,14 +59,14 @@ fun MainScreen (modifier: Modifier = Modifier){
             }
         }
     ) { innerPadding ->
-        ContentScreen(modifier = Modifier.padding(innerPadding), selectedIndex, innerPadding)
+        ContentScreen(modifier = Modifier.padding(innerPadding), selectedIndex, innerPadding, viewModel)
     }
 }
 
 @Composable
-fun ContentScreen (modifier: Modifier = Modifier, selectedIndex : Int, paddingValues: androidx.compose.foundation.layout.PaddingValues){
+fun ContentScreen (modifier: Modifier = Modifier, selectedIndex : Int, paddingValues: androidx.compose.foundation.layout.PaddingValues, viewModel: PostViewModel){
     when(selectedIndex){
-        0-> HomePage(paddingValues = paddingValues)
+        0-> HomePage(viewModel, paddingValues = paddingValues)
         1-> ProfilePage()
     }
 }

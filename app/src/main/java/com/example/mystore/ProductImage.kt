@@ -1,5 +1,6 @@
 package com.example.mystore
 
+
 import coil.compose.AsyncImage
 import androidx.compose.foundation.layout.*
 import androidx.compose.runtime.Composable
@@ -18,3 +19,5 @@ fun ProductImage(imageUrl: String) {
         contentScale = ContentScale.Crop
     )
 }
+
+
