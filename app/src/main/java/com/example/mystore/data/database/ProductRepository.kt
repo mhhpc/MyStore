@@ -10,11 +10,11 @@ class ProductRepository(private val productDao: ProductDao) {
     suspend fun getProducts(): List<Product> {
         return try {
             val response = RetrofitInstance.api.getProducts()
-            productDao.insertAll(response) // ذخیره در Room
+            productDao.insertAll(response) // Save in Room
             response
-        } catch (e: IOException) { // اگر اینترنت قطع باشد
+        } catch (e: IOException) { // If interntet not exist
             productDao.getAllProducts()
-        } catch (e: HttpException) { // اگر خطای سرور رخ دهد
+        } catch (e: HttpException) { // If server Error
             productDao.getAllProducts()
         }
     }
